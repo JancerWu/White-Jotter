@@ -16,7 +16,9 @@ public class LawsController {
     @PostMapping(value = "api/index")
     @ResponseBody
     public Result login(@RequestBody String map) {
-        System.out.println(map);
+        map.trim();
+        String show = map.replaceAll("\\\\n","");
+        System.out.println(show);
         return new Result(200);
     }
 }
