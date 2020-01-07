@@ -52,6 +52,8 @@ public class LawsController {
                 int currentSection = 0; //当前条
                 String currentSectionText = ""; //当前节的内容
 
+                int chapter_id = 0,section_id = 0;
+
                 //遍历所有段，如果不是空段，进行处理
                 for (XWPFParagraph paragraph: paragraphs) {
                     if (!paragraph.isEmpty()){
@@ -60,13 +62,13 @@ public class LawsController {
                             currentChapter ++; //建立新的章
                             currentChapterTittle = paragraph.getText(); //当前章名称更新
                             //提交章的标题和法律id到数据库
-                            dao.save2Base("chapter_insert", currentChapterTittle,law_id);
+                            chapter_id = dao.save2Base("chapter_insert", currentChapterTittle,law_id);
                             continue; //进行下一个循环
                         }
                         //如果是新的条
                         else if (dao.isSection(paragraph.getText())){
                             //把上一条的全部内容提交
-                            boolean flag = dao.save2Base("section_insert", currentSectionText, currentChapter);
+                            section_id = dao.save2Base("section_insert", currentSectionText, chapter_id);
                             currentSection ++; //节号更新
                             currentSectionText = paragraph.getText(); //清空原条内容，更新为新条内容
                             continue;

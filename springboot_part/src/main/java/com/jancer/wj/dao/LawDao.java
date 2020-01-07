@@ -1,9 +1,6 @@
 package com.jancer.wj.dao;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LawDao {
@@ -44,23 +41,23 @@ public class LawDao {
     }
 
     /*提交条到数据库:条内容，章id*/
-    public boolean save2Base(String type, String currentText, int upgradeId) {
-        int id;
+    public int save2Base(String type, String currentText, int upgradeId) {
+        int id = 0; //返回的插入到数据库的条id或者章id
         if (type.equals("section_insert")){
             //执行插入操作：upgradeId 章id；currentText 条内容。
             System.out.println("-----插入表sections的内容-----");
             System.out.println("章id：" + upgradeId + "\n条内容：" + currentText);
             System.out.println("----- 本 条 执 行 完 毕 -----");
-            return true;
+            return id;
         }
         if (type.equals("chapter_insert")){
             //执行插入操作：upgradeId 法律id；currentText 章名。
             System.out.println("-----插入表chapters的内容-----");
             System.out.println("法律id：" + upgradeId + "\n标题：" + currentText);
             System.out.println("----- 本 条 执 行 完 毕 -----");
-            return true;
+            return id;
         }
-        return false;
+        return -1;
     }
 
 
