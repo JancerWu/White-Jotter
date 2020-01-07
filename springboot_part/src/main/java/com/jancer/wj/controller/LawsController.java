@@ -2,6 +2,9 @@ package com.jancer.wj.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jancer.wj.dao.LawDao;
+import com.jancer.wj.pojo.Laws;
+import com.jancer.wj.service.LawsService;
+import com.jancer.wj.service.UserService;
 import com.jancer.wj.vo.LawVo;
 import com.jancer.wj.vo.Result;
 import org.apache.poi.hwpf.HWPFDocument;
@@ -11,6 +14,7 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.xerces.dom.DocumentImpl;
 import org.elasticsearch.index.snapshots.blobstore.SlicedInputStream;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +29,9 @@ import java.util.List;
 @RestController
 public class LawsController {
 
-    @PostMapping("api/upload")
+    @Autowired
+    LawsService lawsService;
+    @PostMapping(value = "api/upload")
     public void upload(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             String fileName = file.getOriginalFilename();
@@ -56,6 +62,9 @@ public class LawsController {
                 }
 
                 System.out.println("上传成功" + fileName);
+                Laws law_test = new Laws();
+                law_test.setLaw_name("test");
+                lawsService.add(law_test);
             } catch (IOException e) {
                 System.out.println("上传失败,自动重启");
             }
@@ -82,6 +91,9 @@ public class LawsController {
 //        String law_body = jo.getString("law_body");
 
 //        LawDao.law_body_split_by_chapter(lawVo.getText());
+        Laws law_test = new Laws();
+        law_test.setLaw_name("test");
+        lawsService.add(law_test);
 
         System.out.println(text);
         return new Result(200);
