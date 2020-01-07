@@ -1,24 +1,14 @@
 package com.jancer.wj.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.jancer.wj.dao.LawDao;
 import com.jancer.wj.pojo.Laws;
 import com.jancer.wj.service.LawsService;
-import com.jancer.wj.service.UserService;
-import com.jancer.wj.vo.LawVo;
 import com.jancer.wj.vo.Result;
-import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.extractor.WordExtractor;
-import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.xerces.dom.DocumentImpl;
-import org.elasticsearch.index.snapshots.blobstore.SlicedInputStream;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,54 +29,14 @@ public class LawsController {
             String filePath = "D:/test/";
             File dest = new File(filePath + fileName);
             LawDao dao = new LawDao();
-            int law_id = dao.addLaw2Base(fileName);
+            int law_id = dao.addLaw2Base(fileName); //法律名添加到数据，返回数据库中的id
             try {
                 file.transferTo(dest);
                 FileInputStream inputStream = new FileInputStream(dest);
                 XWPFDocument document = new XWPFDocument(inputStream);
                 List<XWPFParagraph> paragraphs = document.getParagraphs();
 
-
-                int currentChapter = 0; //当前章
-                String currentChapterTittle = ""; //当前章的标题
-                int currentSection = 0; //当前条
-                String currentSectionText = ""; //当前节的内容
-
-                int chapter_id = 0,section_id = 0;
-
-                //遍历所有段，如果不是空段，进行处理
-                for (XWPFParagraph paragraph: paragraphs) {
-                    if (!paragraph.isEmpty()){
-                        //如果是章
-                        if (dao.isChapter(paragraph.getText())) {
-                            currentChapter ++; //建立新的章
-                            currentChapterTittle = paragraph.getText(); //当前章名称更新
-                            //提交章的标题和法律id到数据库
-                            chapter_id = dao.save2Base("chapter_insert", currentChapterTittle,law_id);
-                            continue; //进行下一个循环
-                        }
-                        //如果是新的条
-                        else if (dao.isSection(paragraph.getText())){
-                            //把上一条的全部内容提交
-                            section_id = dao.save2Base("section_insert", currentSectionText, chapter_id);
-                            currentSection ++; //节号更新
-                            currentSectionText = paragraph.getText(); //清空原条内容，更新为新条内容
-                            continue;
-                        }
-                        //该段落 既不是新的章标题，也不是新的条，对上一条内容进行追加
-                        else {
-                            currentSectionText +=  paragraph.getText();
-                        }
-
-                    }
-//                    System.out.println(paragraph.getText());
-//                    System.out.println("---------------------------------------");
-
-
-//                    if (is){
-//                        currentChapter
-//                    }
-                }
+                boolean flag = dao.runsave(law_id, paragraphs, dao); //运行法律条目分割保存到数据库，如果出现错误停止插入，返回flase反之返回true
 
                 System.out.println("上传成功" + fileName);
                 Laws law_test = new Laws();
