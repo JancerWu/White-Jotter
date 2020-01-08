@@ -1,4 +1,4 @@
-package com.jancer.wj.result;
+package com.jancer.wj.vo;
 
 
 

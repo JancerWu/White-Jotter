@@ -1,7 +1,7 @@
 package com.jancer.wj.controller;
 
 import com.jancer.wj.pojo.User;
-import com.jancer.wj.result.Result;
+import com.jancer.wj.vo.Result;
 import com.jancer.wj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +27,7 @@ public class LoginController {
             return new Result(400);
         } else {
             return new Result(200);
+
         }
     }
 }
