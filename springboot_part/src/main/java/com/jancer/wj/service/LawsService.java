@@ -17,6 +17,10 @@ public class LawsService {
     public Laws getById(String id) {
         return lawsDao.findById(id);
     }
+    public Laws getByLawTitle(String title){
+        return lawsDao.findByLawTitle(title);
+    }
+
     public void add(Laws law) {
         lawsDao.save(law);
     }

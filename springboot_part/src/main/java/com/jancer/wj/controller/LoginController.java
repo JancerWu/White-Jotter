@@ -27,6 +27,7 @@ public class LoginController {
             return new Result(400);
         } else {
             return new Result(200);
+
         }
     }
 }

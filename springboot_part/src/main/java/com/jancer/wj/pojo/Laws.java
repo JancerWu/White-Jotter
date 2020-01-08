@@ -1,6 +1,7 @@
 package com.jancer.wj.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 
@@ -8,14 +9,15 @@ import javax.persistence.*;
 @Table(name = "laws")
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 
+@Repository
 public class Laws {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     int id;
 
-    @Column(name = "law_name")
-    String law_name;
+    @Column(name = "lawTitle")
+    String lawTitle;
 
 
     public int getId() {
@@ -26,12 +28,12 @@ public class Laws {
         this.id = id;
     }
 
-    public String getLaw_name() {
-        return law_name;
+    public String getLawTitle() {
+        return lawTitle;
     }
 
-    public void setLaw_name(String law_name) {
-        this.law_name = law_name;
+    public void setLawTitle(String law_name) {
+        this.lawTitle = law_name;
     }
 }
 
