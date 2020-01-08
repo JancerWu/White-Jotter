@@ -10,6 +10,7 @@ import com.jancer.wj.service.UserService;
 import jdk.nashorn.internal.objects.annotations.Constructor;
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import sun.swing.SwingUtilities2;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Component
@@ -155,4 +157,11 @@ public class LawDao {
         return true;
     }
 
+    public List<Chapters> getAllChaptersByLaw_Id(int law_id){
+        return lawDao.chaptersDao.findAllByLawId(law_id);
+    }
+
+    public List<Sections> getAllSectionByChapter_Id(int chapter_id) {
+        return lawDao.sectionsDao.findAllByChapterId(chapter_id);
+    }
 }
