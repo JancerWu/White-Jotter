@@ -40,11 +40,17 @@ export default {
   },
   methods: {
     login () {
-      // this.tree.push({label: 'dd'})
+      // fetch('http://localhost:8443/api/test')
+      //   .then(response => response.json())
+      //   .then(json => {
+      //     this.tree = json.map_list
+      //     // this.tree.push(json)
+      //   })
+      console.log('gei wo chu lai!!')
       this.$axios
         .post('/test')
         .then(successResponse => {
-          // console.log('test')
+          this.tree = successResponse.data.map_list
         })
         .catch(failResponse => {
         })
