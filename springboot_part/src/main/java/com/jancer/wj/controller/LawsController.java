@@ -235,6 +235,9 @@ public class LawsController {
         LawJson lawJson = new LawJson();
         lawJson.setMap_list(map_list);
         return lawJson;
+//        JSONObject jsonObject = JSONObject.parseObject("{label: \"agvgh\"}, {label: \"sds\"}");
+//        System.out.println(jsonObject);
+//        return jsonObject;
     }
 }
 
