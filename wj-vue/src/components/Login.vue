@@ -26,13 +26,15 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: '123'
+        password: '12'
       },
       responseResult: []
     }
   },
   methods: {
     login () {
+      var _this = this
+      console.log(this.$store.state)
       this.$axios
         .post('/login', {
           username: this.loginForm.username,
@@ -40,9 +42,14 @@ export default {
         })
         .then(successResponse => {
           if (successResponse.data.code === 200) {
-            this.$router.replace({path: '/test'})
+            // this.$router.replace({path: '/test'})
             // this.loginForm.username.post('123')
             // this.$router.push({name: 'index', params: {num_id: 111}})
+            console.log('test')
+            _this.$store.commit('login', _this.loginForm)
+            console.log('test2')
+            var path = this.$route.query.redirct
+            this.$router.replace({path: path === '/' || path === undefined ? '/index' : path})
           }
         })
         .catch(failResponse => {

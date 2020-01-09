@@ -175,42 +175,42 @@ public class LawsController {
         }
         return new Result(200);
     }
-    @GetMapping("api/test")
-    public LawJson getList(){
-        LawDao lawDao = new LawDao();
-
-        //id为9的法律的章节
-        List<Chapters> chapters_list = lawDao.getAllChaptersByLaw_Id(28);
-        List<Map> map_list = new ArrayList<>();
-        for (int i = 0; i<chapters_list.size(); i++){
-            int chapter_id = chapters_list.get(i).getId();
-            List<Sections> sections_list = lawDao.getAllSectionByChapter_Id(chapter_id);
-            Map map_chapter = new HashMap();
-            map_chapter.put("label",chapters_list.get(i).getChapterTittle()); //章标题存入map
-            List<Map> map_section_list = new ArrayList<>();
-            for (int j=0;j<sections_list.size();j++){
-                //章内所有的条存入
-                Map map_section = new HashMap();
-                map_section.put("label",sections_list.get(j).getSectionContent());
-                map_section_list.add(map_section);
-            }
-            map_chapter.put("children",map_section_list);
-            map_list.add(map_chapter);
-        }
-
-        for (int i = 0; i<map_list.size(); i++){
-            System.out.println(map_list.get(i));
-        }
-        LawJson lawJson = new LawJson();
-        lawJson.setMap_list(map_list);
-        return lawJson;
-    }
+//    @GetMapping("api/test")
+//    public LawJson getList(){
+//        LawDao lawDao = new LawDao();
+//
+//        //id为9的法律的章节
+//        List<Chapters> chapters_list = lawDao.getAllChaptersByLaw_Id(28);
+//        List<Map> map_list = new ArrayList<>();
+//        for (int i = 0; i<chapters_list.size(); i++){
+//            int chapter_id = chapters_list.get(i).getId();
+//            List<Sections> sections_list = lawDao.getAllSectionByChapter_Id(chapter_id);
+//            Map map_chapter = new HashMap();
+//            map_chapter.put("label",chapters_list.get(i).getChapterTittle()); //章标题存入map
+//            List<Map> map_section_list = new ArrayList<>();
+//            for (int j=0;j<sections_list.size();j++){
+//                //章内所有的条存入
+//                Map map_section = new HashMap();
+//                map_section.put("label",sections_list.get(j).getSectionContent());
+//                map_section_list.add(map_section);
+//            }
+//            map_chapter.put("children",map_section_list);
+//            map_list.add(map_chapter);
+//        }
+//
+//        for (int i = 0; i<map_list.size(); i++){
+//            System.out.println(map_list.get(i));
+//        }
+//        LawJson lawJson = new LawJson();
+//        lawJson.setMap_list(map_list);
+//        return lawJson;
+//    }
 
     @CrossOrigin
     @PostMapping(value = "api/test")
     public LawJson postList(){
         LawDao lawDao = new LawDao();
-        //id为9的法律的章节
+        //找相应法律的id的章节
         List<Chapters> chapters_list = lawDao.getAllChaptersByLaw_Id(28);
         List<Map> map_list = new ArrayList<>();
         for (int i = 0; i<chapters_list.size(); i++){

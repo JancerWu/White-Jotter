@@ -8,12 +8,13 @@ import TestVue from '@/components/home/TestVue'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
   // 下面都是固定的写法
-    {
-      path: '/',
-      redirect: '/login'
-    },
+    // {
+    //   path: '/',
+    //   redirect: '/login'
+    // },
     {
       path: '/login',
       name: 'Login',
@@ -22,7 +23,10 @@ export default new Router({
     {
       path: '/index',
       name: 'AppIndex',
-      component: AppIndex
+      component: AppIndex,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/test',

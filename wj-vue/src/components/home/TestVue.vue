@@ -38,6 +38,9 @@ export default {
       }
     }
   },
+  created: function () {
+    console.log('this is a test')
+  },
   methods: {
     login () {
       // fetch('http://localhost:8443/api/test')
@@ -46,7 +49,7 @@ export default {
       //     this.tree = json.map_list
       //     // this.tree.push(json)
       //   })
-      console.log('gei wo chu lai!!')
+      // console.log('gei wo chu lai!!')
       this.$axios
         .post('/test')
         .then(successResponse => {
