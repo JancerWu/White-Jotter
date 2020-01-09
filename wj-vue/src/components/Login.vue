@@ -25,8 +25,8 @@ export default {
   data () {
     return {
       loginForm: {
-        username: '',
-        password: ''
+        username: 'admin',
+        password: '123'
       },
       responseResult: []
     }
@@ -40,7 +40,9 @@ export default {
         })
         .then(successResponse => {
           if (successResponse.data.code === 200) {
-            this.$router.replace({path: '/index'})
+            this.$router.replace({path: '/test'})
+            // this.loginForm.username.post('123')
+            // this.$router.push({name: 'index', params: {num_id: 111}})
           }
         })
         .catch(failResponse => {
