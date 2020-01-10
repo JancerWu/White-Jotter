@@ -26,7 +26,7 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: '12'
+        password: '123456'
       },
       responseResult: []
     }
