@@ -24,7 +24,7 @@ export default {
       navList: [
         {name: '/login', navItem: '登录页面'},
         {name: '/test', navItem: '测试页面'},
-        {name: '/index', navItem: '加入数据库'},
+        {name: '/index', navItem: '主功能'},
         {name: '/admin', navItem: '待开发'}
       ]
     }

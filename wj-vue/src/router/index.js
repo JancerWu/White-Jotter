@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // 导入刚才编写的组件
-import AppIndex from '@/components/home/AppIndex'
+import AppIndex from '@/components/mainfunction/AppIndex'
 import Login from '@/components/Login'
 import TestVue from '@/components/home/TestVue'
 import Home from '@/components/Home'
+import AddLaw from '@/components/mainfunction/subfunction/AddLaw'
+import Show from '@/components/mainfunction/subfunction/Show'
 
 Vue.use(Router)
 
@@ -20,7 +22,7 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home,
-      // redirect: '/index',
+      redirect: '/index',
       children: [
         {
           path: '/index',
@@ -28,7 +30,19 @@ export default new Router({
           component: AppIndex,
           meta: {
             requireAuth: true
-          }
+          },
+          children: [
+            {
+              path: '/addlaw',
+              name: 'AddLaw',
+              component: AddLaw
+            },
+            {
+              path: '/show',
+              name: 'Show',
+              component: Show
+            }
+          ]
         },
         {
           path: '/test',

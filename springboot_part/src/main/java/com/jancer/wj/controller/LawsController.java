@@ -207,11 +207,13 @@ public class LawsController {
 //    }
 
     @CrossOrigin
-    @PostMapping(value = "api/test")
-    public LawJson postList(){
+    @PostMapping(value = "api/show")
+    public LawJson postList(@RequestBody JSONObject id){
+        System.out.println(id);
+        System.out.println(id.getIntValue("value"));
         LawDao lawDao = new LawDao();
         //找相应法律的id的章节
-        List<Chapters> chapters_list = lawDao.getAllChaptersByLaw_Id(28);
+        List<Chapters> chapters_list = lawDao.getAllChaptersByLaw_Id(id.getIntValue("value"));
         List<Map> map_list = new ArrayList<>();
         for (int i = 0; i<chapters_list.size(); i++){
             int chapter_id = chapters_list.get(i).getId();

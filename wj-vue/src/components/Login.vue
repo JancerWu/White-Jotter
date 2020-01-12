@@ -23,11 +23,14 @@
 export default {
   name: 'Login',
   data () {
+    // 返回一个数据集对象
     return {
+      // 这是个loginForm对象
       loginForm: {
         username: 'admin',
         password: '123456'
       },
+      // 猜测这是一个相应的键值对
       responseResult: []
     }
   },
@@ -45,6 +48,7 @@ export default {
             // this.$router.replace({path: '/test'})
             // this.loginForm.username.post('123')
             // this.$router.push({name: 'index', params: {num_id: 111}})
+            // alert('登陆成功！')
             console.log('test')
             _this.$store.commit('login', _this.loginForm)
             console.log('test2')

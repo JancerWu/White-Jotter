@@ -164,4 +164,6 @@ public class LawDao {
     public List<Sections> getAllSectionByChapter_Id(int chapter_id) {
         return lawDao.sectionsDao.findAllByChapterId(chapter_id);
     }
+
+
 }
