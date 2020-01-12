@@ -10,11 +10,31 @@
         </el-select>
         <el-button slot="append" icon="el-icon-search" v-on:click = 'search'></el-button>
         <el-tree
+        ref="law"
+        :expand-on-click-node="false"
         :data="tree"
         :props="defaultProps"
+        :highlight-current="true"
         accordion
         @node-click="handleNodeClick">
-</el-tree>
+            <span class="custom-tree-node" slot-scope="{ node, data }">
+            <span>{{ node.label }}</span>
+            <span>
+            <el-button
+                type="text"
+                size="mini"
+                @click="() => append(data)">
+                Append
+            </el-button>
+            <el-button
+                type="text"
+                size="mini"
+                @click="() => remove(node, data)">
+                Delete
+            </el-button>
+            </span>
+            </span>
+        </el-tree>
     </div>
 </template>
 
@@ -63,7 +83,14 @@ export default {
         })
     },
     handleNodeClick (tree) {
-      console.log(tree)
+      console.log('Click+1')
+      console.log(JSON.stringify(this.$refs.law.getCurrentNode()))
+    },
+    append () {
+      console.log('append+1')
+    },
+    remove () {
+      console.log('remove+1')
     }
   }
 }
