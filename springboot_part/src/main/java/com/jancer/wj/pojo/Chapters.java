@@ -20,6 +20,16 @@ public class Chapters {
     @Column(name = "chapterTittle")
     String chapterTittle;
 
+    @Column(name = "chapterState")
+    String chapterState;
+
+    public String getChapterState() {
+        return chapterState;
+    }
+
+    public void setChapterState(String chapterState) {
+        this.chapterState = chapterState;
+    }
 
     public int getId() {
         return id;

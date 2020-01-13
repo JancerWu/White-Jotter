@@ -7,6 +7,7 @@ import TestVue from '@/components/home/TestVue'
 import Home from '@/components/Home'
 import AddLaw from '@/components/mainfunction/subfunction/AddLaw'
 import Show from '@/components/mainfunction/subfunction/Show'
+import Update from '@/components/mainfunction/subfunction/Update'
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
               path: '/show',
               name: 'Show',
               component: Show
+            },
+            {
+              path: '/update',
+              name: 'Update',
+              component: Update
             }
           ]
         },

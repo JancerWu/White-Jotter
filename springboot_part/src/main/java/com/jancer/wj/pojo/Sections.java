@@ -20,6 +20,16 @@ public class Sections {
     @Column(name = "sectionContent")
     String sectionContent;
 
+    @Column(name = "sectionState")
+    String sectionState;
+
+    public String getSectionState() {
+        return sectionState;
+    }
+
+    public void setSectionState(String sectionState) {
+        this.sectionState = sectionState;
+    }
 
     public int getId() {
         return id;

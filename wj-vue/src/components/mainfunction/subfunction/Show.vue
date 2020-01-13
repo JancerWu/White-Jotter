@@ -18,7 +18,7 @@
         accordion
         @node-click="handleNodeClick">
             <span class="custom-tree-node" slot-scope="{ node, data }">
-            <span>{{ node.label }}</span>
+              <span>{{ node.label }}</span>
             <span>
             <el-button
                 type="text"

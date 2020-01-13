@@ -19,6 +19,16 @@ public class Laws {
     @Column(name = "lawTitle")
     String lawTitle;
 
+    @Column(name = "lawState")
+    String lawState;
+
+    public String getLawState() {
+        return lawState;
+    }
+
+    public void setLawState(String lawState) {
+        this.lawState = lawState;
+    }
 
     public int getId() {
         return id;
