@@ -28,7 +28,8 @@
         <el-button slot="append" icon="el-icon-search" v-on:click = 'search'></el-button>
 
           <el-table
-    height="250"
+    border
+    height="500"
     :data="tableData"
     style="width: 100%">
     <el-table-column
@@ -64,6 +65,18 @@
 
 <script>
 export default {
+//   toOtherSide (pass, requestBody) {
+//     this.$axios
+//       .post(pass, requestBody)
+//       .then(successResponse => {
+//         console.log('use toOtherSide funtion successfully!!')
+//         var arr = successResponse.data
+//         //   console.log(JSON.stringify(arr))
+//         this.tableData = arr
+//       })
+//       .catch(failResponse => {
+//       })
+//   },
   name: 'Show',
   data () {
     return {
@@ -96,6 +109,18 @@ export default {
       })
   },
   methods: {
+    toOtherSide (pass, requestBody) {
+      this.$axios
+        .post(pass, requestBody)
+        .then(successResponse => {
+          console.log('use toOtherSide funtion successfully!!')
+          var arr = successResponse.data
+          //   console.log(JSON.stringify(arr))
+          this.tableData = arr
+        })
+        .catch(failResponse => {
+        })
+    },
     changeLaw (e) {
       console.log('changeLaw!!')
       console.log(e)
@@ -128,18 +153,10 @@ export default {
     search () {
       console.log('这是法律id:' + this.valueLaw)
       console.log('这是章节id:' + this.valueChapter)
-      this.$axios
-        .post('/searchSections', {law_id: this.valueLaw, chapter_id: this.valueChapter})
-        .then(successResponse => {
-          console.log('search sections successfully!!')
-          var arr = successResponse.data
-          //   console.log(JSON.stringify(arr))
-          this.tableData = arr
-        })
-        .catch(failResponse => {
-        })
+      this.toOtherSide('/searchSections', {law_id: this.valueLaw, chapter_id: this.valueChapter})
     },
     handleEdit (index, row) {
+      //   console.log(this.tableData[index])
       console.log(index, row)
     },
     handleDelete (index, row) {
